@@ -4,13 +4,13 @@ import 'package:mvc_tasks/components/difficulty.dart';
 class Task extends StatefulWidget {
   final String name;
   final String srcPhoto;
-  final int nivelDificuldade;
+  final int difficultyLevel;
 
   const Task(
       {super.key,
       required this.name,
       required this.srcPhoto,
-      required this.nivelDificuldade});
+      required this.difficultyLevel});
 
   @override
   State<Task> createState() => _TaskState();
@@ -24,6 +24,10 @@ class _TaskState extends State<Task> {
 
   bool showBtnNivelUp = false;
   bool showBtnNivelDown = false;
+
+  bool _isImageNetwork() {
+    return widget.srcPhoto.startsWith('http');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +64,15 @@ class _TaskState extends State<Task> {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
-                          child: Image.asset(
-                            widget.srcPhoto,
-                            fit: BoxFit.cover,
-                          ),
+                          child: _isImageNetwork()
+                              ? Image.network(
+                                  widget.srcPhoto,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  widget.srcPhoto,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                     ),
@@ -81,7 +90,7 @@ class _TaskState extends State<Task> {
                             ),
                           ),
                           Difficulty(
-                            difficultyLevel: widget.nivelDificuldade,
+                            difficultyLevel: widget.difficultyLevel,
                           ),
                         ],
                       ),
@@ -128,8 +137,8 @@ class _TaskState extends State<Task> {
                     child: SizedBox(
                       width: 200,
                       child: LinearProgressIndicator(
-                        value: widget.nivelDificuldade > 0
-                            ? (nivel / widget.nivelDificuldade) / nivelMaximo
+                        value: widget.difficultyLevel > 0
+                            ? (nivel / widget.difficultyLevel) / nivelMaximo
                             : 1,
                       ),
                     ),

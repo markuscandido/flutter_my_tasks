@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_tasks/data/task_inherited.dart';
 import 'package:mvc_tasks/screens/tasks_screen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MvcTasksApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const TasksScreen(),
+      home: TaskInherited(child: const TasksScreen()),
     );
   }
 }
