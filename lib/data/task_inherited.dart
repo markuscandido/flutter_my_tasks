@@ -12,27 +12,27 @@ class TaskInherited extends InheritedWidget {
         );
 
   final List<Task> taskList = [
-    const Task(
+    Task(
       name: 'Aprender Flutter',
       srcPhoto: 'assets/images/dash.png',
       difficultyLevel: 3,
     ),
-    const Task(
+    Task(
       name: 'Andar de Bike',
       srcPhoto: 'assets/images/bike.webp',
       difficultyLevel: 2,
     ),
-    const Task(
+    Task(
       name: 'Meditar',
       srcPhoto: 'assets/images/meditar.jpeg',
       difficultyLevel: 5,
     ),
-    const Task(
+    Task(
       name: 'Ler',
       srcPhoto: 'assets/images/livro.jpg',
       difficultyLevel: 4,
     ),
-    const Task(
+    Task(
       name: 'Jogar',
       srcPhoto: 'assets/images/jogar.jpg',
       difficultyLevel: 1,

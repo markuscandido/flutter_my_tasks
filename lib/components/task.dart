@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:mvc_tasks/components/difficulty.dart';
 
@@ -6,11 +8,14 @@ class Task extends StatefulWidget {
   final String srcPhoto;
   final int difficultyLevel;
 
-  const Task(
-      {super.key,
-      required this.name,
-      required this.srcPhoto,
-      required this.difficultyLevel});
+  int nivel = 0;
+
+  Task({
+    super.key,
+    required this.name,
+    required this.srcPhoto,
+    required this.difficultyLevel,
+  });
 
   @override
   State<Task> createState() => _TaskState();
@@ -19,8 +24,6 @@ class Task extends StatefulWidget {
 class _TaskState extends State<Task> {
   static const int nivelMinimo = 0;
   static const int nivelMaximo = 10;
-
-  int nivel = 0;
 
   bool showBtnNivelUp = false;
   bool showBtnNivelDown = false;
@@ -100,10 +103,10 @@ class _TaskState extends State<Task> {
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              if (nivel >= nivelMaximo) {
+                              if (widget.nivel >= nivelMaximo) {
                                 return;
                               }
-                              nivel++;
+                              widget.nivel++;
                               //showBtnNivelUp = nivel < nivelMaximo;
                               //showBtnNivelDown = nivel > nivelMinimo;
                             });
@@ -113,10 +116,10 @@ class _TaskState extends State<Task> {
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              if (nivel <= nivelMinimo) {
+                              if (widget.nivel <= nivelMinimo) {
                                 return;
                               }
-                              nivel--;
+                              widget.nivel--;
                               //showBtnNivelUp = nivel < nivelMaximo;
                               //showBtnNivelDown = nivel > nivelMinimo;
                             });
@@ -138,7 +141,8 @@ class _TaskState extends State<Task> {
                       width: 200,
                       child: LinearProgressIndicator(
                         value: widget.difficultyLevel > 0
-                            ? (nivel / widget.difficultyLevel) / nivelMaximo
+                            ? (widget.nivel / widget.difficultyLevel) /
+                                nivelMaximo
                             : 1,
                       ),
                     ),
@@ -146,7 +150,7 @@ class _TaskState extends State<Task> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Nível: $nivel',
+                      'Nível: ${widget.nivel}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
