@@ -8,14 +8,14 @@ class Task extends StatefulWidget {
   final String srcPhoto;
   final int difficultyLevel;
 
-  int nivel = 0;
-
   Task({
     super.key,
     required this.name,
     required this.srcPhoto,
     required this.difficultyLevel,
   });
+
+  int nivel = 0;
 
   @override
   State<Task> createState() => _TaskState();
