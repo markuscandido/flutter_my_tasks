@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_tasks/data/task_inherited.dart';
+import 'package:mvc_tasks/screens/form_validate/difficulty_range_form_validate.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key, required this.taskContext}) : super(key: key);
@@ -43,7 +44,7 @@ class _FormScreenState extends State<FormScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     validator: (String? value) {
-                      if (value != null && value.isEmpty) {
+                      if (isNotNullOrEmpty(value)) {
                         return 'Insira o nome da Tarefa';
                       }
                       return null;
@@ -61,14 +62,8 @@ class _FormScreenState extends State<FormScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty ||
-                          int.parse(value) > 5 ||
-                          int.parse(value) < 1) {
-                        return 'Insira um Dificuldade entre 1 e 5';
-                      }
-                      return null;
-                    },
+                    validator: (value) =>
+                        DifficultyRangeInputFormValidate().validator(value),
                     keyboardType: TextInputType.number,
                     controller: difficultyController,
                     textAlign: TextAlign.center,
@@ -87,7 +82,7 @@ class _FormScreenState extends State<FormScreen> {
                       setState(() {});
                     },
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (isNotNullOrEmpty(value)) {
                         return 'Insira um URL de Imagem!';
                       }
                       return null;
@@ -153,4 +148,7 @@ class _FormScreenState extends State<FormScreen> {
       ),
     );
   }
+
+  /// Validar se o campo do formulários está preenchido
+  bool isNotNullOrEmpty(String? value) => value != null && value.isEmpty;
 }

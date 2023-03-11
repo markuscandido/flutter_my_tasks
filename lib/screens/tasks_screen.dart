@@ -19,7 +19,7 @@ class _TasksPageState extends State<TasksScreen> {
         backgroundColor: Colors.blue,
       ),
       body: ListView(
-        padding: const EdgeInsets.only(top: 8.0, bottom: 68.0),
+        padding: const EdgeInsets.only(top: 8.0, bottom: 72.0),
         children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
