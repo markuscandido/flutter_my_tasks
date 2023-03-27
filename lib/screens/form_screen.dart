@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mvc_tasks/data/task_inherited.dart';
+import 'package:mvc_tasks/data/dao/task_dao.dart';
+import 'package:mvc_tasks/data/model/tasks.dart';
 import 'package:mvc_tasks/screens/form_validate/difficulty_range_form_validate.dart';
 
 class FormScreen extends StatefulWidget {
@@ -126,11 +127,12 @@ class _FormScreenState extends State<FormScreen> {
                         print(difficultyController.text);
                         print(imageController.text);
                       }
-                      TaskInherited.of(widget.taskContext).newTask(
-                        nameController.text,
-                        imageController.text,
-                        int.parse(difficultyController.text),
+                      final Tasks newTask = Tasks(
+                        name: nameController.text,
+                        difficulty: int.parse(difficultyController.text),
+                        image: imageController.text,
                       );
+                      TaskDao().create(newTask);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Tarefa adicionada'),

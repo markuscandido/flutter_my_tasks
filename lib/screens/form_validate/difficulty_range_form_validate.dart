@@ -4,7 +4,7 @@ class DifficultyRangeInputFormValidate {
 
   String? validator(String? value) {
     if (_isNotValidDifficultyRange(value)) {
-      return 'Insira um Dificuldade entre $minRange e $maxRange';
+      return 'Insira uma Dificuldade entre $minRange e $maxRange';
     }
     return null;
   }

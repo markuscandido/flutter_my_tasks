@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mvc_tasks/data/task_inherited.dart';
 import 'package:mvc_tasks/screens/tasks_screen.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MvcTasksApp());
 }
 

@@ -2,14 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:mvc_tasks/components/difficulty.dart';
+import 'package:mvc_tasks/data/dao/task_dao.dart';
 
 class Task extends StatefulWidget {
+  final int id;
   final String name;
   final String srcPhoto;
   final int difficultyLevel;
 
   Task({
     super.key,
+    required this.id,
     required this.name,
     required this.srcPhoto,
     required this.difficultyLevel,
@@ -101,6 +104,7 @@ class _TaskState extends State<Task> {
                     Column(
                       children: [
                         ElevatedButton(
+                          onLongPress: removeTask,
                           onPressed: () {
                             setState(() {
                               if (widget.nivel >= nivelMaximo) {
@@ -114,6 +118,7 @@ class _TaskState extends State<Task> {
                           child: const Icon(Icons.arrow_drop_up),
                         ),
                         ElevatedButton(
+                          onLongPress: removeTask,
                           onPressed: () {
                             setState(() {
                               if (widget.nivel <= nivelMinimo) {
@@ -163,6 +168,25 @@ class _TaskState extends State<Task> {
           ),
         ],
       ),
+    );
+  }
+
+  void removeTask() {
+    AlertDialog(
+      title: const Text('Title'),
+      content: const Text('Content'),
+      actions: [
+        TextButton(
+          child: const Text('Yes'),
+          onPressed: () {
+            TaskDao().delete(widget.id);
+          },
+        ),
+        TextButton(
+          child: const Text('No'),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }
